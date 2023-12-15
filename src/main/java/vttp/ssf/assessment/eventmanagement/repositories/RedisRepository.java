@@ -40,4 +40,10 @@ public class RedisRepository {
 	public Event getEvent(Integer index) {
 		return listOps.index("events", Long.valueOf(index));
 	}
+
+	public void addParticipants(Integer tickets, Integer index) {
+		Event event = getEvent(index);
+		event.setParticipants(event.getParticipants() + tickets);
+		listOps.set("events", Long.valueOf(index), event);
+	}
 }

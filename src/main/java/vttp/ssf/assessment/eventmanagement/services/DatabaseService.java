@@ -3,7 +3,10 @@ package vttp.ssf.assessment.eventmanagement.services;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +48,10 @@ public class DatabaseService {
             JsonArray eventArray = jsonReader.readArray();
             for (JsonValue eventValue: eventArray) {
                 JsonObject eventObject = eventValue.asJsonObject();
-                Event event = new Event(eventObject.getInt("eventId"), eventObject.getString("eventName"), eventObject.getInt("eventSize"), Long.valueOf(eventObject.getInt("eventDate")), eventObject.getInt("participants"));
+                
+                // System.out.println(Long.valueOf(eventObject.get("eventDate").toString()));
+                // System.out.println(new Date(Long.valueOf(eventObject.get("eventDate").toString())));
+                Event event = new Event(eventObject.getInt("eventId"), eventObject.getString("eventName"), eventObject.getInt("eventSize"), Long.valueOf(eventObject.get("eventDate").toString()), eventObject.getInt("participants"));
                 events.add(event);
             }
         } catch (FileNotFoundException e) {
@@ -56,4 +62,26 @@ public class DatabaseService {
 
         return events;
     }
+
+    public boolean ageValid(Date birthDate) {
+        Instant birthDateIns = birthDate.toInstant();
+        Instant now = Instant.now();
+        Long days = ChronoUnit.DAYS.between(birthDateIns, now);
+        Long age = days/365L;
+
+        return age >= 21L;
+    }
+
+    public boolean sizeExceeded(Integer tickets, Integer index) {
+        Event event = redisRepo.getEvent(index);
+        Integer participants = event.getParticipants();
+        Integer size = event.getEventSize();
+        return (participants + tickets) > size;
+    }
+
+    public void addParticipants(Integer tickets, Integer index) {
+        redisRepo.addParticipants(tickets, index);
+    }
+    
+
 }

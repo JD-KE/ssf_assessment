@@ -23,9 +23,11 @@ public class EventmanagementApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		List<Event> events = databaseSvc.readFile("./events.json");
-		for (Event event : events) {
-			// System.out.println(event);
-			databaseSvc.saveRecord(event);
+		if (databaseSvc.getNumberOfEvents() == 0) {
+			for (Event event : events) {
+				// System.out.println(event);
+				databaseSvc.saveRecord(event);
+			}
 		}
 		System.out.println(databaseSvc.getNumberOfEvents());
 		System.out.println(databaseSvc.getEvent(1));

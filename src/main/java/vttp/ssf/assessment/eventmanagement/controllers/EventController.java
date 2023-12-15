@@ -38,7 +38,7 @@ public class EventController {
 
 	@GetMapping("/listing/register/{index}")
 	public String registerEvent(@PathVariable(name="index") Integer index) {
-		index = index - 1;
+		
 
 		return String.format("redirect:/events/register/%d",index);
 

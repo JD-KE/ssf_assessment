@@ -28,9 +28,61 @@ public class Registration {
     private String email;
 
     @Pattern(regexp = "(8|9)[0-9]{7}", message = "Invalid phone number entered.")
-    private String phone;
+    private String mobileNo;
+
+    private String gender;
 
     @Min(value = 1, message = "Minimum of 1 ticket to be requested.")
     @Max(value = 3, message = "Maximum of 3 tickets allowed to be requested.")
     private Integer tickets;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobileNo() {
+        return mobileNo;
+    }
+
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Integer getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Integer tickets) {
+        this.tickets = tickets;
+    }
+
+    
 }
