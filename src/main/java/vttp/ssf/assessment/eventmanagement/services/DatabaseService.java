@@ -56,14 +56,15 @@ public class DatabaseService {
             }
         } catch (FileNotFoundException e) {
             //remember to remove and replace with
-            // System.out.println("File not found");
-            e.printStackTrace();
+            System.out.println("File not found");
+            // e.printStackTrace();
         }
 
         return events;
     }
 
     public boolean ageValid(Date birthDate) {
+        
         Instant birthDateIns = birthDate.toInstant();
         Instant now = Instant.now();
         Long days = ChronoUnit.DAYS.between(birthDateIns, now);

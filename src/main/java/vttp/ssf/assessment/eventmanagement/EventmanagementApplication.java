@@ -25,7 +25,7 @@ public class EventmanagementApplication implements CommandLineRunner {
 		List<Event> events = databaseSvc.readFile("./events.json");
 		if (databaseSvc.getNumberOfEvents() == 0) {
 			for (Event event : events) {
-				// System.out.println(event);
+				System.out.println(event);
 				databaseSvc.saveRecord(event);
 			}
 		}
