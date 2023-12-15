@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Register Event</h1>
+    <p>You have chosen to register for the following event:</p>
+
+    <h2 data-th-object="${event}">
+        <span data-th-text="${event.eventName}"></span>
+        <br>
+        <span data-th-text="${#dates.format(event.eventDate, 'dd-MM-yyyy')}"></span>
+    </h2>
+</body>
+</html>
